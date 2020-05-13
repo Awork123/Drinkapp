@@ -39,5 +39,9 @@ public class SupportActivity extends AppCompatActivity implements View.OnClickLi
             Intent goToWhatIs = new Intent(this, SuppportWhatIsActivity.class);
             startActivity(goToWhatIs);
         }
+        if (view == emailSupport) {
+            Intent gotoEmailhelp = new Intent(this, SupportEmail.class);
+            startActivity(gotoEmailhelp);
+        }
     }
 }
