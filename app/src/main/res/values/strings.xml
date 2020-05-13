@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DrinkApp</string>
+    <string name="title_activity_drinks_list">DrinksList</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="navigation_drawer_open">Open Navigation</string>
+    <string name="navigation_drawer_close">Close Navigation</string>
+</resources>
