@@ -55,14 +55,17 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.nav_help:
                 Intent supportMenu = new Intent(MainMenu.this, SupportActivity.class);
                 startActivity(supportMenu);
+                finish();
                 break;
             case R.id.nav_account:
                 Intent accountMenu = new Intent(MainMenu.this, AccountActivity.class);
                 startActivity(accountMenu);
+                finish();
                 break;
             case R.id.nav_history:
                 Intent historyMenu = new Intent(MainMenu.this, HistoryActivity.class);
                 startActivity(historyMenu);
+                finish();
                 break;
             case R.id.nav_logout:
                 Intent logout = new Intent(MainMenu.this, MainActivity.class);
