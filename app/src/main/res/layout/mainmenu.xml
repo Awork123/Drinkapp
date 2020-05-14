@@ -5,74 +5,32 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".MainMenu">
+    tools:context=".MainMenu"
+    android:fitsSystemWindows="true">
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
+        android:id="@+id/nav_view"
         app:headerLayout="@layout/header"
-        app:menu="@menu/main_menu" />
+        app:menu="@menu/main_menu"
+        android:layout_gravity="start"/>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <FrameLayout android:layout_height="0dp"
+            android:layout_weight="100"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:id="@+id/indhold">
 
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/toolbar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/orderDrinks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="158dp"
-                android:layout_marginLeft="158dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="165dp"
-                android:layout_marginRight="165dp"
-                android:background="@drawable/round_button"
-                android:text="Order!"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView4" />
-
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="140dp"
-                android:layout_height="149dp"
-                android:layout_marginStart="135dp"
-                android:layout_marginLeft="135dp"
-                android:layout_marginTop="222dp"
-                android:layout_marginEnd="136dp"
-                android:layout_marginRight="136dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                app:srcCompat="@drawable/ic_face_black" />
-
-            <TextView
-                android:id="@+id/greetings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="31dp"
-                android:gravity="center"
-                android:text="Hello and welcome to the Autobar app! \nIf you wish to order drinks, click on the\n order button below, to see our\nselection of drinks!\n If you are unsure how this works\n to the 'Help' tab. Here you will find a\nquick guide and help for ordering your drinks!"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
-
+        </FrameLayout>
+    </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -6,6 +6,4 @@
     android:background="@color/colorPrimary"
     android:elevation="6dp"
     app:navigationIcon="@drawable/ic_more_options">
-
-
 </androidx.appcompat.widget.Toolbar>

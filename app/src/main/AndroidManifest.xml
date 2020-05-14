@@ -14,9 +14,8 @@
         <activity android:name=".SuppportWhatIsActivity" />
         <activity android:name=".SupportMyOrderActivity" />
         <activity android:name=".SupportPaymentActivity" />
-        <activity android:name=".AccountActivity" />
-        <activity android:name=".HistoryActivity" />
-        <activity android:name=".SupportActivity" />
+        <activity android:name=".AccountFragment" />
+        <activity android:name=".HistoryFragment" />
         <activity android:name=".MainMenu" />
         <activity android:name=".MainActivity">
             <intent-filter>

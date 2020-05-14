@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".SupportActivity">
+    tools:context=".SupportFragment">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -24,13 +24,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:context=".SupportActivity">
-
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/toolbar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textIntro"

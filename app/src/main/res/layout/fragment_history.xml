@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".HistoryActivity">
+    tools:context=".HistoryFragment">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -23,14 +23,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".HistoryActivity">
-
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".HistoryFragment">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
