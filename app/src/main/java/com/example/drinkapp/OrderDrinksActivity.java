@@ -15,7 +15,7 @@ import android.view.View;
 
 public class OrderDrinksActivity extends AppCompatActivity {
 
-    String[] testSet = {"Test1","Test2"};
+    String[] testSet = {"Test1","Test2","Test3"};
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -36,9 +36,6 @@ public class OrderDrinksActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(mAdapter);
 
-        // Set the toolbar from the passed in context, with a fallback title of "Hello List"
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
     }
 
 }

@@ -31,7 +31,6 @@ public class DrinksViewActivity extends RecyclerView.Adapter<DrinksViewActivity.
         View v = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.recyclelist_drinkviewlist, parent, false);
-
         return new DrinksViewHolder(v);
     }
 

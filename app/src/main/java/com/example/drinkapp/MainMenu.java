@@ -21,7 +21,7 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
-    Fragment forside;
+    Fragment mainpage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +39,11 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView.setNavigationItemSelectedListener(this);
-
         navigationView.setCheckedItem(R.id.nav_home);
-        forside = new MainMenuFragment();
+        navigationView.setNavigationItemSelectedListener(this);
+        mainpage = new MainMenuFragment();
 
-        getSupportFragmentManager().beginTransaction().add(R.id.indhold, forside, null).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.content_of_fragment, mainpage, null).commit();
     }
     @Override
     public void onBackPressed() {
@@ -61,16 +60,16 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
         System.out.println("hej");
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
-                getSupportFragmentManager().beginTransaction().replace(R.id.indhold, forside, null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_of_fragment, mainpage, null).commit();
                 break;
             case R.id.nav_help:
-                getSupportFragmentManager().beginTransaction().replace(R.id.indhold, new SupportFragment()).commit(); //Brug add i stedet for replace hvis layoutet er tomt til at starte med.
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_of_fragment, new SupportFragment()).commit();
                 break;
             case R.id.nav_account:
-                getSupportFragmentManager().beginTransaction().replace(R.id.indhold, new AccountFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_of_fragment, new AccountFragment()).commit();
                 break;
             case R.id.nav_history:
-                getSupportFragmentManager().beginTransaction().replace(R.id.indhold, new HistoryFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_of_fragment, new HistoryFragment()).commit();
                 break;
             case R.id.nav_logout:
                 Intent logout = new Intent(MainMenu.this, MainActivity.class);
