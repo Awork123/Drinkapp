@@ -9,18 +9,31 @@
     android:gravity="center"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:layout_width="250dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/autobarlogo" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="Welcome to the autobar app!"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Please create a username.\n\nThe username will be shown in the queue, and when you pick up your drink in real life"
+        android:layout_marginLeft="20dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/round_edittext">
 
         <ImageView
@@ -31,13 +44,22 @@
         <EditText
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:id="@+id/et_Username"
+            android:id="@+id/signup_Username"
             android:hint="Enter Username"
             android:textColor="@android:color/white"
             android:background="@android:color/transparent"/>
 
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Your password must include atleast 8 characters, and contain 1 number"
+        android:layout_marginLeft="20dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -55,7 +77,7 @@
         <EditText
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:id="@+id/et_Password"
+            android:id="@+id/signup_Password"
             android:hint="Enter Password"
             android:textColor="@android:color/white"
             android:background="@android:color/transparent"/>
@@ -63,30 +85,30 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
         <Button
-            android:id="@+id/bt_sign_up"
+            android:id="@+id/bt_sign_up_to_server"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="50dp"
             android:background="@drawable/round_button"
             android:text="Sign up"
+            android:layout_marginTop="10dp"
             android:textColor="@android:color/white" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Already have an account?"
+        android:layout_marginLeft="20dp" />
 
         <Button
-            android:id="@+id/bt_submit"
+            android:id="@+id/bt_go_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/round_button"
             android:text="Log in"
             android:textColor="@android:color/white" />
-    </LinearLayout>
 
 </LinearLayout>
