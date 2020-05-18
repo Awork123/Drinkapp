@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -21,12 +20,7 @@ public class SupportEmail extends AppCompatActivity {
         mEditTextMessage = findViewById(R.id.editemailtext);
         Button buttonSendEmail = findViewById(R.id.buttonsendemail);
 
-        buttonSendEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendMail();
-            }
-        });
+        buttonSendEmail.setOnClickListener(v -> sendMail());
     }
 
     private void sendMail() {

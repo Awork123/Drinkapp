@@ -30,10 +30,11 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
 
         View v = inflater.inflate(R.layout.fragment_account, container, false);
 
-        textName = v.findViewById(R.id.textEmail);
-        textGetName = v.findViewById(R.id.textEmail);
+        textName = v.findViewById(R.id.textName);
+        textGetName = v.findViewById(R.id.textGetName);
         buttonEdit = v.findViewById(R.id.buttonEdit);
         buttonEdit.setOnClickListener(this);
+
         return v;
     }
 

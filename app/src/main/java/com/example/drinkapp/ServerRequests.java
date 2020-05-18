@@ -15,11 +15,12 @@ import okhttp3.RequestBody;
 public class ServerRequests<T> extends AsyncTask {
     T object;
     Callback callback;
-    ServerRequests(@Nullable T object, Callback callback)
-    {
+
+    ServerRequests(@Nullable T object, Callback callback) {
         this.object = object;
         this.callback = callback;
     }
+
     @Override
     protected Object doInBackground(Object[] objects) {
         try {

@@ -5,17 +5,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
 public class DrinksViewActivity extends RecyclerView.Adapter<DrinksViewActivity.DrinksViewHolder> {
     private ArrayList<DrinkViewItems> mDrinkList;
     private OnItemClickListener mListener;
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(int position);
     }
-    public void setOnItemClickListener(OnItemClickListener listener){
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
 
@@ -35,9 +38,9 @@ public class DrinksViewActivity extends RecyclerView.Adapter<DrinksViewActivity.
             checkedDrinks = view.findViewById(R.id.CheckedDrink);
 
             view.setOnClickListener(v -> {
-                if (listener != null){
+                if (listener != null) {
                     int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION){
+                    if (position != RecyclerView.NO_POSITION) {
                         listener.onItemClick(position);
                     }
                 }

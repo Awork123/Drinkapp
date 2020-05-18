@@ -45,19 +45,18 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
 
         getSupportFragmentManager().beginTransaction().add(R.id.content_of_fragment, mainpage, null).commit();
     }
+
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        System.out.println("hej");
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_of_fragment, mainpage, null).commit();

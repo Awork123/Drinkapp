@@ -24,6 +24,7 @@ public class SupportFragment extends Fragment implements View.OnClickListener {
         buttonGeneralInfoOptions = v.findViewById(R.id.bnGeneralInfo);
         buttonInfoMyOrder = v.findViewById(R.id.bnMyOrder);
         emailSupport = v.findViewById(R.id.bnEmailHelp);
+
         buttonPaymentInfoOptions.setOnClickListener(this);
         buttonGeneralInfoOptions.setOnClickListener(this);
         buttonInfoMyOrder.setOnClickListener(this);
@@ -32,21 +33,25 @@ public class SupportFragment extends Fragment implements View.OnClickListener {
         return v;
     }
 
-
-
     @Override
     public void onClick(View view) {
-        if (view == buttonPaymentInfoOptions) {
-            Intent goToPaymentInfo = new Intent(getActivity(), SupportPaymentActivity.class);
-            startActivity(goToPaymentInfo);
-        }
-        if (view == buttonInfoMyOrder) {
-            Intent goToMyOrderInfo = new Intent(getActivity(), SupportMyOrderActivity.class);
-            startActivity(goToMyOrderInfo);
-        }
-        if (view == buttonGeneralInfoOptions) {
-            Intent goToWhatIs = new Intent(getActivity(), SuppportWhatIsActivity.class);
-            startActivity(goToWhatIs);
+        switch (view.getId()) {
+            case R.id.bnPayment:
+                Intent goToPaymentInfo = new Intent(getActivity(), SupportPaymentActivity.class);
+                startActivity(goToPaymentInfo);
+                break;
+            case R.id.bnGeneralInfo:
+                Intent goToWhatIs = new Intent(getActivity(), SuppportWhatIsActivity.class);
+                startActivity(goToWhatIs);
+                break;
+            case R.id.bnMyOrder:
+                Intent goToMyOrderInfo = new Intent(getActivity(), SupportMyOrderActivity.class);
+                startActivity(goToMyOrderInfo);
+                break;
+            case R.id.bnEmailHelp:
+                Intent emailSupport = new Intent(getActivity(), SupportEmail.class);
+                startActivity(emailSupport);
+                break;
         }
     }
 }

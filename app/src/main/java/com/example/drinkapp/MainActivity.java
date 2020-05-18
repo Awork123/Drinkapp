@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (view == btSubmit) {
             if (etUsername.getText().toString().equals("Simon") &&
-                    etPassword.getText().toString().equals("Bjergø")) {
+                    etPassword.getText().toString().equals("ErSej")) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(
                         MainActivity.this
                 );
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_SHORT).show();
             }
         }
-        if (view == btSignUp){
+        if (view == btSignUp) {
             Intent signUpIntent = new Intent(this, SignUpActivity.class);
             startActivity(signUpIntent);
             finish();

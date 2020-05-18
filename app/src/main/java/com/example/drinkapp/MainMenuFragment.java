@@ -31,6 +31,5 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
             Intent orderDrinks = new Intent(getActivity(), OrderDrinksActivity.class);
             startActivity(orderDrinks);
         }
-
     }
 }

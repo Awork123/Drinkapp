@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -36,20 +37,23 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        if (view == btLoginReturn){
-            Intent returnToLogin = new Intent(this, MainActivity.class);
-            startActivity(returnToLogin);
-            finish();
-        }
-        if (view == btSignUpToServer) {
-            SignUp serverSignUpRequest = new SignUp(signupUsername.getText().toString(), signUpPassword.getText().toString());
-            ServerRequests<SignUp> sr = new ServerRequests<SignUp>(serverSignUpRequest, new signUpCallBack());
-            sr.execute();
-            Intent goBackToLogin = new Intent(this, MainActivity.class);
-            startActivity(goBackToLogin);
-            finish();
+        switch (view.getId()) {
+            case R.id.bt_sign_up_to_server:
+                SignUp serverSignUpRequest = new SignUp(signupUsername.getText().toString(), signUpPassword.getText().toString());
+                ServerRequests<SignUp> sr = new ServerRequests<SignUp>(serverSignUpRequest, new signUpCallBack());
+                sr.execute();
+                Intent goBackToLogin = new Intent(this, MainActivity.class);
+                startActivity(goBackToLogin);
+                finish();
+                break;
+            case R.id.bt_go_back:
+                Intent returnToLogin = new Intent(this, MainActivity.class);
+                startActivity(returnToLogin);
+                finish();
+                break;
         }
     }
+
     class SignUp {
         String mail;
         String password;
@@ -59,18 +63,19 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             password = pword;
         }
     }
-    class signUpCallBack implements Callback {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                e.printStackTrace();
-                System.out.println("failed");
-                call.cancel();
-            }
 
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                System.out.println(response.body().string());
-                System.out.println("Response Received");
-            }
+    class signUpCallBack implements Callback {
+        @Override
+        public void onFailure(@NotNull Call call, @NotNull IOException e) {
+            e.printStackTrace();
+            System.out.println("failed");
+            call.cancel();
+        }
+
+        @Override
+        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+            System.out.println(response.body().string());
+            System.out.println("Response Received");
+        }
     }
 }
