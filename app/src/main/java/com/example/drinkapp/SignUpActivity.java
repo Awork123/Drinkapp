@@ -42,19 +42,19 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             finish();
         }
         if (view == btSignUpToServer) {
-            Login minven = new Login(signupUsername.getText().toString(), signUpPassword.getText().toString());
-            ServerRequests<Login> sr = new ServerRequests<>(null, new signUpCallBack());
+            SignUp serverSignUpRequest = new SignUp(signupUsername.getText().toString(), signUpPassword.getText().toString());
+            ServerRequests<SignUp> sr = new ServerRequests<SignUp>(serverSignUpRequest, new signUpCallBack());
             sr.execute();
             Intent goBackToLogin = new Intent(this, MainActivity.class);
             startActivity(goBackToLogin);
             finish();
         }
     }
-    class Login {
+    class SignUp {
         String mail;
         String password;
 
-        Login(String uname, String pword) {
+        SignUp(String uname, String pword) {
             mail = uname;
             password = pword;
         }
@@ -63,14 +63,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 e.printStackTrace();
-                System.out.println("hello");
+                System.out.println("failed");
                 call.cancel();
             }
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 System.out.println(response.body().string());
-                System.out.println("asdasd");
+                System.out.println("Response Received");
             }
     }
 }
