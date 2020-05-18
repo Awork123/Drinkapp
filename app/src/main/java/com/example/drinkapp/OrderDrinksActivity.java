@@ -1,7 +1,6 @@
 package com.example.drinkapp;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,30 +8,48 @@ import java.util.ArrayList;
 
 public class OrderDrinksActivity extends AppCompatActivity {
 
+    private ArrayList<DrinkViewItems> mDrinkList;
+
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private DrinksViewActivity mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("Drinkslist activated");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orderdrinks);
 
-        ArrayList<DrinkViewItems> drinkList = new ArrayList<>();
-        drinkList.add(new DrinkViewItems(R.drawable.ic_history, "Vodka+Cola", "Its good"));
-        drinkList.add(new DrinkViewItems(R.drawable.ic_account, "Vodka+Fanta", "Aight"));
-        drinkList.add(new DrinkViewItems(R.drawable.ic_more_options, "Rom+Cola", "Fine, I guess"));
-
-        recyclerView = findViewById(R.id.drinksList);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        mAdapter = new DrinksViewActivity(drinkList);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        recyclerView.setAdapter(mAdapter);
+        createDrinkList();
+        showDrinksRecycleView();
 
     }
 
+    public void changeItem(int position, String text) {
+        mDrinkList.get(position).changetext1(text);
+        mAdapter.notifyItemChanged(position);
+    }
+
+    private void createDrinkList() {
+        mDrinkList = new ArrayList<>();
+        mDrinkList.add(new DrinkViewItems(R.drawable.ic_history, "Vodka+Cola", "Its good", "15kr,-"));
+        mDrinkList.add(new DrinkViewItems(R.drawable.ic_account, "Vodka+Fanta", "Aight", "17kr,-"));
+        mDrinkList.add(new DrinkViewItems(R.drawable.ic_more_options, "Rom+Cola", "Fine, I guess", "20kr,-"));
+    }
+    private void showDrinksRecycleView() {
+        recyclerView = findViewById(R.id.drinksList);
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this);
+        mAdapter = new DrinksViewActivity(mDrinkList);
+
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new DrinksViewActivity.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                changeItem(position, "Test");
+            }
+        });
+    }
 }

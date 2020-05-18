@@ -5,24 +5,44 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 
 public class DrinksViewActivity extends RecyclerView.Adapter<DrinksViewActivity.DrinksViewHolder> {
     private ArrayList<DrinkViewItems> mDrinkList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
 
     public static class DrinksViewHolder extends RecyclerView.ViewHolder {
         public TextView drinkMame;
         public TextView drinkDescription;
         public ImageView drinkImage;
+        public TextView drinkPrice;
 
-        public DrinksViewHolder(View view) {
+        public DrinksViewHolder(View view, final OnItemClickListener listener) {
             super(view);
             drinkMame = view.findViewById(R.id.DrinksName);
             drinkDescription = view.findViewById(R.id.DrinksDescription);
             drinkImage = view.findViewById(R.id.DrinkImage);
+            drinkPrice = view.findViewById(R.id.DrinkPrice);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -34,7 +54,7 @@ public class DrinksViewActivity extends RecyclerView.Adapter<DrinksViewActivity.
     public DrinksViewActivity.DrinksViewHolder
     onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclelist_drinkviewlist, parent, false);
-        return new DrinksViewHolder(v);
+        return new DrinksViewHolder(v, mListener);
     }
 
     @Override
@@ -43,6 +63,7 @@ public class DrinksViewActivity extends RecyclerView.Adapter<DrinksViewActivity.
         holder.drinkImage.setImageResource(currentItem.getImageDrink());
         holder.drinkMame.setText(currentItem.getDrinkName());
         holder.drinkDescription.setText(currentItem.getDrinkDescription());
+        holder.drinkPrice.setText(currentItem.getDrinkPrice());
     }
 
     @Override
