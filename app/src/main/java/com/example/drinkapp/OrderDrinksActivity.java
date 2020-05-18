@@ -1,5 +1,8 @@
 package com.example.drinkapp;
+import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +14,7 @@ public class OrderDrinksActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private DrinksViewActivity mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private int statePosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +28,6 @@ public class OrderDrinksActivity extends AppCompatActivity {
 
     public void changeItem(int position, int drawable) {
         mDrinkList.get(position).changeImage(drawable);
-        mAdapter.notifyItemChanged(position);
     }
 
     private void createDrinkList() {
@@ -33,6 +36,7 @@ public class OrderDrinksActivity extends AppCompatActivity {
         mDrinkList.add(new DrinkViewItems(R.drawable.ic_account, "Vodka+Fanta", "Aight", "17kr,-", R.drawable.ic_face_black));
         mDrinkList.add(new DrinkViewItems(R.drawable.ic_more_options, "Rom+Cola", "Fine, I guess", "20kr,-", R.drawable.ic_face_black));
     }
+
     private void showDrinksRecycleView() {
         recyclerView = findViewById(R.id.drinksList);
         recyclerView.setHasFixedSize(true);
@@ -44,10 +48,15 @@ public class OrderDrinksActivity extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener(new DrinksViewActivity.OnItemClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onItemClick(int position) {
-
+                //Easier to track of the amount of elements, than if we used traditional for loop.
+                mDrinkList.forEach((drink) -> {
+                    drink.changeImage(R.drawable.ic_face_black);
+                });
                 changeItem(position, R.drawable.ic_getdrink);
+                recyclerView.setAdapter(mAdapter);
             }
         });
     }

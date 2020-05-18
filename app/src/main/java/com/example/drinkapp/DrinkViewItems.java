@@ -16,6 +16,7 @@ public class DrinkViewItems {
     }
     public void changeImage(int drawable){
         mChecked = drawable;
+
     }
     public int getImageDrink() {
         return mDrinkImage;
