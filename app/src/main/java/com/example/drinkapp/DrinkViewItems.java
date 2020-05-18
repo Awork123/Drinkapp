@@ -2,18 +2,20 @@ package com.example.drinkapp;
 
 public class DrinkViewItems {
     private int mDrinkImage;
+    private int mChecked;
     private String mDrinkName;
     private String mDrinkDescription;
     private String mDrinkprice;
 
-    public DrinkViewItems(int drinkImage, String drinkName, String drinkDescription, String drinkPrice){
+    public DrinkViewItems(int drinkImage, String drinkName, String drinkDescription, String drinkPrice, int checked){
         mDrinkImage = drinkImage;
         mDrinkName = drinkName;
         mDrinkDescription = drinkDescription;
         mDrinkprice = drinkPrice;
+        mChecked = checked;
     }
-    public void changetext1(String text){
-        mDrinkName = text;
+    public void changeImage(int drawable){
+        mChecked = drawable;
     }
     public int getImageDrink() {
         return mDrinkImage;
@@ -27,4 +29,5 @@ public class DrinkViewItems {
     public String getDrinkPrice(){
         return mDrinkprice;
     }
+    public int getChecked(){return mChecked;}
 }

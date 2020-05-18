@@ -24,6 +24,7 @@ public class DrinksViewActivity extends RecyclerView.Adapter<DrinksViewActivity.
         public TextView drinkDescription;
         public ImageView drinkImage;
         public TextView drinkPrice;
+        public ImageView checkedDrinks;
 
         public DrinksViewHolder(View view, final OnItemClickListener listener) {
             super(view);
@@ -31,6 +32,7 @@ public class DrinksViewActivity extends RecyclerView.Adapter<DrinksViewActivity.
             drinkDescription = view.findViewById(R.id.DrinksDescription);
             drinkImage = view.findViewById(R.id.DrinkImage);
             drinkPrice = view.findViewById(R.id.DrinkPrice);
+            checkedDrinks = view.findViewById(R.id.CheckedDrink);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -64,6 +66,7 @@ public class DrinksViewActivity extends RecyclerView.Adapter<DrinksViewActivity.
         holder.drinkMame.setText(currentItem.getDrinkName());
         holder.drinkDescription.setText(currentItem.getDrinkDescription());
         holder.drinkPrice.setText(currentItem.getDrinkPrice());
+        holder.checkedDrinks.setImageResource(currentItem.getChecked());
     }
 
     @Override
