@@ -34,14 +34,11 @@ public class DrinksViewActivity extends RecyclerView.Adapter<DrinksViewActivity.
             drinkPrice = view.findViewById(R.id.DrinkPrice);
             checkedDrinks = view.findViewById(R.id.CheckedDrink);
 
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null){
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION){
-                            listener.onItemClick(position);
-                        }
+            view.setOnClickListener(v -> {
+                if (listener != null){
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION){
+                        listener.onItemClick(position);
                     }
                 }
             });

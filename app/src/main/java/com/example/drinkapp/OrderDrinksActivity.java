@@ -16,6 +16,7 @@ public class OrderDrinksActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private int statePosition;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,7 @@ public class OrderDrinksActivity extends AppCompatActivity {
         mDrinkList.add(new DrinkViewItems(R.drawable.ic_more_options, "Rom+Cola", "Fine, I guess", "20kr,-", R.drawable.ic_face_black));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void showDrinksRecycleView() {
         recyclerView = findViewById(R.id.drinksList);
         recyclerView.setHasFixedSize(true);
@@ -47,17 +49,11 @@ public class OrderDrinksActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(new DrinksViewActivity.OnItemClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onItemClick(int position) {
-                //Easier to track of the amount of elements, than if we used traditional for loop.
-                mDrinkList.forEach((drink) -> {
-                    drink.changeImage(R.drawable.ic_face_black);
-                });
-                changeItem(position, R.drawable.ic_getdrink);
-                recyclerView.setAdapter(mAdapter);
-            }
+        mAdapter.setOnItemClickListener(position -> {
+            //Easier to track of the amount of elements, than if we used traditional for loop.
+            mDrinkList.forEach((drink) -> drink.changeImage(R.drawable.ic_face_black));
+            changeItem(position, R.drawable.ic_getdrink);
+            recyclerView.setAdapter(mAdapter);
         });
     }
 }
