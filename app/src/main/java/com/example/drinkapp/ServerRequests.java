@@ -16,11 +16,13 @@ public class ServerRequests<T> extends AsyncTask {
     T object;
     Callback callback;
     LoginType loginType;
+    String path;
 
-    ServerRequests(@Nullable T object, @Nullable LoginType loginType, Callback callback) {
+    ServerRequests(String path, @Nullable T object, @Nullable LoginType loginType, Callback callback) {
         this.object = object;
         this.callback = callback;
         this.loginType = loginType;
+        this.path = path;
     }
 
     @Override
@@ -34,14 +36,14 @@ public class ServerRequests<T> extends AsyncTask {
 
             RequestBody body = RequestBody.create(userJson, JSON);
             Request.Builder reqBuilder = new Request.Builder()
-                    .url("http://10.0.1.30:8080/user/register")
+                    .url("http://10.0.1.30/" + path)
                     .post(body);
 
             if(loginType != null) {
                 switch (loginType)
                 {
-                    case Basic: reqBuilder.header("Authorization", "basic " + loginType.hash); break;
-                    case Token: reqBuilder.header("Authorization", "toke " + loginType.hash); break;
+                    case Basic: reqBuilder.header("Authorization", "Basic " + loginType.hash); break;
+                    case Token: reqBuilder.header("Authorization", "Token " + loginType.hash); break;
                 }
             }
 
