@@ -52,25 +52,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ServerRequests sr = new ServerRequests("user/login",null, LoginType.basic(username, password), new Callback() {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
-
+                    Toast.makeText(getApplicationContext(), "Unable to connect to server", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                    Gson gson = new Gson();
-
-                    String token = gson.fromJson(response.body().string(), Token.class).token;
-
-                    System.out.println(token);
+                    if (response.equals("ok")){
+                        Gson gson = new Gson();
+                        String token = gson.fromJson(response.body().string(), Token.class).token;
+                        System.out.println(token);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setIcon(R.drawable.ic_mood);
+                        builder.setTitle("Succesfully logged in!");
+                        builder.setMessage("Welcome and drink!!");
+                        builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                Intent mainMenu = new Intent(getApplicationContext(), MainMenu.class);
+                                startActivity(mainMenu);
+                                finish();
+                            }
+                        });
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    }
+                    else if (response.equals("unauthorized")){
+                        Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
-
             sr.execute();
-            if (etUsername.getText().toString().equals("Simon") &&
-                    etPassword.getText().toString().equals("ErSej")) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(
-                        MainActivity.this
-                );
+
+            if (etUsername.getText().toString().equals("Simon") && etPassword.getText().toString().equals("ErSej")) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setIcon(R.drawable.ic_mood);
                 builder.setTitle("Succesfully logged in!");
                 builder.setMessage("Welcome and drink!!");
