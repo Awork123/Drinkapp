@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             });
             sr.execute();
-
+            /*
             if (etUsername.getText().toString().equals("Simon") && etPassword.getText().toString().equals("ErSej")) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setIcon(R.drawable.ic_mood);
@@ -101,14 +101,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
-            }
+            } */
         }
         if (view == btSignUp) {
             Intent signUpIntent = new Intent(this, SignUpActivity.class);
             startActivity(signUpIntent);
             finish();
         }
-
     }
 
     class Token {
