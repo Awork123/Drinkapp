@@ -42,8 +42,8 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="142dp"
         android:layout_marginRight="142dp"
-        android:text="send problem"
         android:background="@drawable/round_button"
+        android:text="send problem"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editemailtext" />

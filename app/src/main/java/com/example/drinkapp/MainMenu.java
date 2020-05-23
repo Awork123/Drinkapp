@@ -67,9 +67,6 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.nav_account:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_of_fragment, new AccountFragment()).commit();
                 break;
-            case R.id.nav_history:
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_of_fragment, new HistoryFragment()).commit();
-                break;
             case R.id.nav_logout:
                 Intent logout = new Intent(MainMenu.this, MainActivity.class);
                 startActivity(logout);

@@ -12,8 +12,6 @@ public enum LoginType {
 
     public String hash;
 
-    private LoginType() { }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     static LoginType basic(String username, String password) {
         LoginType login = Basic;

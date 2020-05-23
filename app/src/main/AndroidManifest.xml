@@ -18,7 +18,6 @@
         <activity android:name=".SupportPaymentActivity" />
         <activity android:name=".AccountFragment" />
         <activity android:name=".SupportFragment" />
-        <activity android:name=".HistoryFragment" />
         <activity android:name=".MainMenu" />
         <activity android:name=".MainActivity">
             <intent-filter>

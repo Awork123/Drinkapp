@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <ImageView
@@ -18,23 +17,23 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:gravity="center"
         android:layout_marginTop="30dp"
-        android:background="@drawable/round_edittext">
+        android:background="@drawable/round_edittext"
+        android:gravity="center"
+        android:padding="10dp">
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_face_black"/>
+            android:src="@drawable/ic_face_black" />
 
         <EditText
+            android:id="@+id/et_Username"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:id="@+id/et_Username"
+            android:background="@android:color/transparent"
             android:hint="Enter Username"
-            android:textColor="@android:color/white"
-            android:background="@android:color/transparent"/>
+            android:textColor="@android:color/white" />
 
 
     </LinearLayout>
@@ -42,23 +41,23 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:gravity="center"
         android:layout_marginTop="10dp"
-        android:background="@drawable/round_edittext">
+        android:background="@drawable/round_edittext"
+        android:gravity="center"
+        android:padding="10dp">
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_lock"/>
+            android:src="@drawable/ic_lock" />
 
         <EditText
+            android:id="@+id/et_Password"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:id="@+id/et_Password"
+            android:background="@android:color/transparent"
             android:hint="Enter Password"
-            android:textColor="@android:color/white"
-            android:background="@android:color/transparent"/>
+            android:textColor="@android:color/white" />
 
 
     </LinearLayout>
@@ -72,8 +71,8 @@
             android:id="@+id/bt_sign_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/round_button"
             android:text="Sign up"
             android:textColor="@android:color/white" />
@@ -82,8 +81,8 @@
             android:id="@+id/bt_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/round_button"
             android:text="Log in"
             android:textColor="@android:color/white" />
