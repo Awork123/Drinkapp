@@ -5,8 +5,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -77,9 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             switch (response.code()){
                 case 200:
-                    Gson gson = new Gson();
-                    String token = gson.fromJson(response.body().string(), Token.class).token;
-                    System.out.println(token);
                     runOnUiThread(() -> {
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                         builder.setIcon(R.drawable.ic_mood);
@@ -97,6 +96,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         AlertDialog alertDialog = builder.create();
                         alertDialog.show();
                     });
+                    Gson gson = new Gson();
+                    String token = gson.fromJson(response.body().string(), Token.class).token;
+                    SharedPreferences preferences = getSharedPreferences("App", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("Token", token);
+                    editor.apply();
+                    System.out.println(token);
+
                     break;
                 default:
                     @SuppressLint("ShowToast")
