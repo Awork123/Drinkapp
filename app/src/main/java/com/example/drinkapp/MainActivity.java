@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText etUsername, etPassword;
     Button btSubmit, btSignUp;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String username = etUsername.getText().toString();
             String password = etPassword.getText().toString();
 
-            ServerRequests sr = new ServerRequests("user/login",null, LoginType.basic(username, password), new LoginCallBack());
+            ServerRequests sr = new ServerRequests("user/login", null, LoginType.basic(username, password), new LoginCallBack());
             sr.execute();
 
         }
@@ -68,16 +67,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onFailure(@NotNull Call call, @NotNull IOException e) {
             call.cancel();
-            @SuppressLint("ShowToast")
-            Toast toast = Toast.makeText(getApplicationContext(), "Unable to connect to server", Toast.LENGTH_SHORT);
-            runOnUiThread(toast::show);
-
+            runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Unable to connect to server", Toast.LENGTH_SHORT).show());
         }
 
         @Override
         public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-
-            switch (response.code()){
+            switch (response.code()) {
                 case 200:
                     runOnUiThread(() -> {
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -103,12 +98,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     editor.putString("Token", token);
                     editor.apply();
                     System.out.println(token);
-
                     break;
                 default:
-                    @SuppressLint("ShowToast")
-                    Toast toast = Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_SHORT);
-                    runOnUiThread(toast::show);
+                    runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Invalid password or username", Toast.LENGTH_SHORT).show());
             }
         }
     }
