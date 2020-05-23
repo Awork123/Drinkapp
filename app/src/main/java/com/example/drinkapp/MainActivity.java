@@ -26,6 +26,7 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     EditText etUsername, etPassword;
     Button btSubmit, btSignUp;
+    NetworkSuccess serverResponse = NetworkSuccess.UnableToConnect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,37 +53,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ServerRequests sr = new ServerRequests("user/login",null, LoginType.basic(username, password), new Callback() {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                    Toast.makeText(getApplicationContext(), "Unable to connect to server", Toast.LENGTH_SHORT).show();
+                    serverResponse = NetworkSuccess.UnableToConnect;
                 }
 
                 @Override
                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                    if (response.equals("ok")){
+                    if (response.code() == 200){
                         Gson gson = new Gson();
                         String token = gson.fromJson(response.body().string(), Token.class).token;
                         System.out.println(token);
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                        builder.setIcon(R.drawable.ic_mood);
-                        builder.setTitle("Succesfully logged in!");
-                        builder.setMessage("Welcome and drink!!");
-                        builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                                Intent mainMenu = new Intent(getApplicationContext(), MainMenu.class);
-                                startActivity(mainMenu);
-                                finish();
-                            }
-                        });
-                        AlertDialog alertDialog = builder.create();
-                        alertDialog.show();
+                        serverResponse = NetworkSuccess.LoginSuccess;
                     }
-                    else if (response.equals("unauthorized")){
-                        Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_SHORT).show();
+                    else {
+                        serverResponse = NetworkSuccess.LoginError;
                     }
                 }
             });
             sr.execute();
+            getPopup();
+
             /*
             if (etUsername.getText().toString().equals("Simon") && etPassword.getText().toString().equals("ErSej")) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -107,6 +96,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent signUpIntent = new Intent(this, SignUpActivity.class);
             startActivity(signUpIntent);
             finish();
+        }
+    }
+
+    public void getPopup() {
+        switch (serverResponse){
+            case UnableToConnect:
+                Toast.makeText(getApplicationContext(), "Unable to connect to server", Toast.LENGTH_SHORT).show();
+                break;
+            case LoginError:
+                Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_SHORT).show();
+                break;
+            case LoginSuccess:
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setIcon(R.drawable.ic_mood);
+                builder.setTitle("Successfully logged in!");
+                builder.setMessage("Welcome and drink!!");
+                builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        Intent mainMenu = new Intent(getApplicationContext(), MainMenu.class);
+                        startActivity(mainMenu);
+                        finish();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                break;
         }
     }
 
