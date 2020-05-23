@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -26,7 +27,7 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     EditText etUsername, etPassword;
     Button btSubmit, btSignUp;
-    NetworkSuccess serverResponse = NetworkSuccess.UnableToConnect;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,47 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String username = etUsername.getText().toString();
             String password = etPassword.getText().toString();
 
-            ServerRequests sr = new ServerRequests("user/login",null, LoginType.basic(username, password), new Callback() {
-                @Override
-                public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                    serverResponse = NetworkSuccess.UnableToConnect;
-                }
-
-                @Override
-                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                    if (response.code() == 200){
-                        Gson gson = new Gson();
-                        String token = gson.fromJson(response.body().string(), Token.class).token;
-                        System.out.println(token);
-                        serverResponse = NetworkSuccess.LoginSuccess;
-                    }
-                    else {
-                        serverResponse = NetworkSuccess.LoginError;
-                    }
-                }
-            });
+            ServerRequests sr = new ServerRequests("user/login",null, LoginType.basic(username, password), new LoginCallBack());
             sr.execute();
-            getPopup();
 
-            /*
-            if (etUsername.getText().toString().equals("Simon") && etPassword.getText().toString().equals("ErSej")) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setIcon(R.drawable.ic_mood);
-                builder.setTitle("Succesfully logged in!");
-                builder.setMessage("Welcome and drink!!");
-
-                builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                        Intent mainMenu = new Intent(getApplicationContext(), MainMenu.class);
-                        startActivity(mainMenu);
-                        finish();
-                    }
-                });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-            } */
         }
         if (view == btSignUp) {
             Intent signUpIntent = new Intent(this, SignUpActivity.class);
@@ -99,35 +62,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void getPopup() {
-        switch (serverResponse){
-            case UnableToConnect:
-                Toast.makeText(getApplicationContext(), "Unable to connect to server", Toast.LENGTH_SHORT).show();
-                break;
-            case LoginError:
-                Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_SHORT).show();
-                break;
-            case LoginSuccess:
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setIcon(R.drawable.ic_mood);
-                builder.setTitle("Successfully logged in!");
-                builder.setMessage("Welcome and drink!!");
-                builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                        Intent mainMenu = new Intent(getApplicationContext(), MainMenu.class);
-                        startActivity(mainMenu);
-                        finish();
-                    }
-                });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-                break;
+    class LoginCallBack implements Callback {
+        @Override
+        public void onFailure(@NotNull Call call, @NotNull IOException e) {
+            call.cancel();
+            @SuppressLint("ShowToast")
+            Toast toast = Toast.makeText(getApplicationContext(), "Unable to connect to server", Toast.LENGTH_SHORT);
+            runOnUiThread(toast::show);
+
+        }
+
+        @Override
+        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+
+            switch (response.code()){
+                case 200:
+                    Gson gson = new Gson();
+                    String token = gson.fromJson(response.body().string(), Token.class).token;
+                    System.out.println(token);
+                    runOnUiThread(() -> {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setIcon(R.drawable.ic_mood);
+                        builder.setTitle("Successfully logged in!");
+                        builder.setMessage("Welcome and drink!!");
+                        builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                Intent mainMenu = new Intent(getApplicationContext(), MainMenu.class);
+                                startActivity(mainMenu);
+                                finish();
+                            }
+                        });
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    });
+                    break;
+                default:
+                    @SuppressLint("ShowToast")
+                    Toast toast = Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_SHORT);
+                    runOnUiThread(toast::show);
+            }
         }
     }
 
-    class Token {
+    private class Token {
         String token;
     }
 }
