@@ -15,10 +15,12 @@ import okhttp3.RequestBody;
 public class ServerRequests<T> extends AsyncTask {
     T object;
     Callback callback;
+    LoginType loginType;
 
-    ServerRequests(@Nullable T object, Callback callback) {
+    ServerRequests(@Nullable T object, @Nullable LoginType logineType, Callback callback) {
         this.object = object;
         this.callback = callback;
+        this.loginType = logineType;
     }
 
     @Override
@@ -31,12 +33,19 @@ public class ServerRequests<T> extends AsyncTask {
             OkHttpClient client = new OkHttpClient();
 
             RequestBody body = RequestBody.create(userJson, JSON);
-            Request req = new Request.Builder()
+            Request.Builder reqBuilder = new Request.Builder()
                     .url("http://10.0.1.30:8080/user/register")
-                    .post(body)
-                    .build();
+                    .post(body);
 
-            client.newCall(req).enqueue(this.callback);
+            if(loginType != null) {
+                switch (loginType)
+                {
+                    case Basic: reqBuilder.header("Authorization", "basic " + loginType.hash); break;
+                    case Token: reqBuilder.header("Authorization", "toke " + loginType.hash); break;
+                }
+            }
+
+            client.newCall(reqBuilder.build()).enqueue(this.callback);
 
         } catch (Exception e) {
             e.printStackTrace();
