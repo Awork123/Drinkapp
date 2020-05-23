@@ -17,10 +17,10 @@ public class ServerRequests<T> extends AsyncTask {
     Callback callback;
     LoginType loginType;
 
-    ServerRequests(@Nullable T object, @Nullable LoginType logineType, Callback callback) {
+    ServerRequests(@Nullable T object, @Nullable LoginType loginType, Callback callback) {
         this.object = object;
         this.callback = callback;
-        this.loginType = logineType;
+        this.loginType = loginType;
     }
 
     @Override

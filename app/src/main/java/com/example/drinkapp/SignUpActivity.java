@@ -40,7 +40,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         switch (view.getId()) {
             case R.id.bt_sign_up_to_server:
                 SignUp serverSignUpRequest = new SignUp(signupUsername.getText().toString(), signUpPassword.getText().toString());
-                ServerRequests<SignUp> sr = new ServerRequests<SignUp>(serverSignUpRequest, new signUpCallBack());
+                ServerRequests<SignUp> sr = new ServerRequests<SignUp>(serverSignUpRequest, null, new signUpCallBack());
                 sr.execute();
                 Intent goBackToLogin = new Intent(this, MainActivity.class);
                 startActivity(goBackToLogin);
