@@ -67,9 +67,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onFailure(@NotNull Call call, @NotNull IOException e) {
             call.cancel();
             runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Unable to connect to server", Toast.LENGTH_SHORT).show());
-            Intent mainMenu = new Intent(getApplicationContext(), MainMenu.class);
+            /* Intent mainMenu = new Intent(getApplicationContext(), MainMenu.class);
             startActivity(mainMenu);
-            finish();
+            finish();*/
         }
 
         @Override
