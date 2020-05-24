@@ -33,7 +33,6 @@ public enum LoginType {
                 .getEncoder()
                 .withoutPadding()
                 .encodeToString(token.getBytes());
-
         return login;
     }
 }

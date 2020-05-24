@@ -38,6 +38,7 @@ public class OrderDrinksActivity extends AppCompatActivity {
         mDrinkList.add(new DrinkViewItems(R.drawable.ic_history, "Vodka+Cola", "Its good", "15kr,-", R.drawable.ic_face_black));
         mDrinkList.add(new DrinkViewItems(R.drawable.ic_account, "Vodka+Fanta", "Aight", "17kr,-", R.drawable.ic_face_black));
         mDrinkList.add(new DrinkViewItems(R.drawable.ic_more_options, "Rom+Cola", "Fine, I guess", "20kr,-", R.drawable.ic_face_black));
+        mDrinkList.add(new DrinkViewItems(R.drawable.ic_history, "Vodka+Cola", "Its good", "15kr,-", R.drawable.ic_face_black));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

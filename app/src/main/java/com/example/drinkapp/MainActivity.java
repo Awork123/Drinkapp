@@ -4,7 +4,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -48,18 +47,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClick(View view) {
-        if (view == btSubmit) {
-            String username = etUsername.getText().toString();
-            String password = etPassword.getText().toString();
-
-            ServerRequests sr = new ServerRequests("user/login", null, LoginType.basic(username, password), new LoginCallBack());
-            sr.execute();
-
-        }
-        if (view == btSignUp) {
-            Intent signUpIntent = new Intent(this, SignUpActivity.class);
-            startActivity(signUpIntent);
-            finish();
+        switch (view.getId()) {
+            case R.id.bt_sign_up:
+                Intent signUpIntent = new Intent(this, SignUpActivity.class);
+                startActivity(signUpIntent);
+                finish();
+                break;
+            case R.id.bt_submit:
+                String username = etUsername.getText().toString();
+                String password = etPassword.getText().toString();
+                ServerRequests sr = new ServerRequests("user/login", null, LoginType.basic(username, password), new LoginCallBack());
+                sr.execute();
+                break;
         }
     }
 
@@ -68,6 +67,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onFailure(@NotNull Call call, @NotNull IOException e) {
             call.cancel();
             runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Unable to connect to server", Toast.LENGTH_SHORT).show());
+            Intent mainMenu = new Intent(getApplicationContext(), MainMenu.class);
+            startActivity(mainMenu);
+            finish();
         }
 
         @Override

@@ -3,6 +3,7 @@
     package="com.example.drinkapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".HistoryFragment" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SupportEmail" />
         <activity android:name=".AccountEditActivity" />
