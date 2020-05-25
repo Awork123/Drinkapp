@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_submit:
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
-                ServerRequests sr = new ServerRequests("user/login", null, LoginType.basic(username, password), new LoginCallBack());
+                ServerRequests sr = new ServerRequests("user/login", null, LoginType.basic(username, password), new LoginCallBack(), HTTPRequestType.Post);
                 sr.execute();
                 break;
         }

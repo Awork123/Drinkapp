@@ -12,17 +12,21 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
+
+
 public class ServerRequests<T> extends AsyncTask {
     T object;
     Callback callback;
     LoginType loginType;
     String path;
+    HTTPRequestType requestType;
 
-    ServerRequests(String path, @Nullable T object, @Nullable LoginType loginType, Callback callback) {
+    ServerRequests(String path, @Nullable T object, @Nullable LoginType loginType, Callback callback, HTTPRequestType requestType) {
         this.object = object;
         this.callback = callback;
         this.loginType = loginType;
         this.path = path;
+        this.requestType = requestType;
     }
 
     @Override
@@ -36,8 +40,13 @@ public class ServerRequests<T> extends AsyncTask {
 
             RequestBody body = RequestBody.create(userJson, JSON);
             Request.Builder reqBuilder = new Request.Builder()
-                    .url("http://10.0.1.30/" + path)
-                    .post(body);
+                    .url("http://10.0.1.30/" + path);
+
+            switch (requestType) {
+                case Get: reqBuilder = reqBuilder.get(); break;
+                case Post: reqBuilder = reqBuilder.post(body);
+                    System.out.println("Time to print");;break;
+            }
 
             if(loginType != null) {
                 switch (loginType)
