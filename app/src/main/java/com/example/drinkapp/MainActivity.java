@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_submit:
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
-                ServerRequests sr = new ServerRequests("user/login", null, LoginType.basic(username, password), new LoginCallBack());
+                ServerRequests sr = new ServerRequests("user/login", null, LoginType.basic(username, password), new LoginCallBack(), HTTPRequestType.Post);
                 sr.execute();
                 break;
         }
@@ -100,11 +101,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     editor.putString("Token", token);
                     editor.apply();
                     System.out.println(token);
+                    ServerRequests sr = new ServerRequests("machine", null, null, new MachineHanlder(), HTTPRequestType.Get);
+                    sr.execute();
                     break;
                 default:
                     runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Invalid password or username", Toast.LENGTH_SHORT).show());
             }
         }
+    }
+
+    class MachineHanlder implements Callback {
+        @Override
+        public void onFailure(@NotNull Call call, @NotNull IOException e) {
+        }
+
+        @Override
+        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+            switch (response.code()) {
+                case 200:
+                    Gson gson = new Gson();
+                    Machine[] machines = gson.fromJson(response.body().string(), Machine[].class);
+                    String id = machines[0].id;
+                    SharedPreferences preferences = getSharedPreferences("App", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("MachineID", id);
+                    editor.apply();
+                    System.out.println(id);
+                    break;
+                default:
+                    runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Invalid password or username", Toast.LENGTH_SHORT).show());
+            }
+        }
+    }
+
+    class Machine {
+        String id;
+        String name;
     }
 
     private class Token {
