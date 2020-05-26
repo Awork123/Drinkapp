@@ -20,7 +20,6 @@ import com.google.gson.Gson;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -52,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_sign_up:
                 Intent signUpIntent = new Intent(this, SignUpActivity.class);
                 startActivity(signUpIntent);
-                finish();
                 break;
             case R.id.bt_submit:
                 String username = etUsername.getText().toString();
@@ -86,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
-                                Intent mainMenu = new Intent(getApplicationContext(), MainMenu.class);
+                                Intent mainMenu = new Intent(getApplicationContext(), MainMenuActivity.class);
                                 startActivity(mainMenu);
                                 finish();
                             }
@@ -101,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     editor.putString("Token", token);
                     editor.apply();
                     System.out.println(token);
-                    ServerRequests sr = new ServerRequests("machine", null, null, new MachineHanlder(), HTTPRequestType.Get);
+                    ServerRequests sr = new ServerRequests("machine", null, null, new MachineHandler(), HTTPRequestType.Get);
                     sr.execute();
                     break;
                 default:
@@ -110,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    class MachineHanlder implements Callback {
+    class MachineHandler implements Callback {
         @Override
         public void onFailure(@NotNull Call call, @NotNull IOException e) {
         }

@@ -16,12 +16,12 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.navigation.NavigationView;
 
 
-public class MainMenu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainMenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
-    Fragment mainpage;
+    Fragment mainPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +41,9 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
 
         navigationView.setCheckedItem(R.id.nav_home);
         navigationView.setNavigationItemSelectedListener(this);
-        mainpage = new MainMenuFragment();
+        mainPage = new MainMenuFragment();
 
-        getSupportFragmentManager().beginTransaction().add(R.id.content_of_fragment, mainpage, null).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.content_of_fragment, mainPage, null).commit();
     }
 
     @Override
@@ -59,7 +59,7 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_of_fragment, mainpage, null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_of_fragment, mainPage, null).commit();
                 break;
             case R.id.nav_help:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_of_fragment, new SupportFragment()).commit();
@@ -71,7 +71,7 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_of_fragment, new HistoryFragment()).commit();
                 break;
             case R.id.nav_logout:
-                Intent logout = new Intent(MainMenu.this, MainActivity.class);
+                Intent logout = new Intent(MainMenuActivity.this, MainActivity.class);
                 startActivity(logout);
                 finish();
                 break;

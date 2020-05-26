@@ -22,7 +22,7 @@
         <activity android:name=".SupportPaymentActivity" />
         <activity android:name=".AccountFragment" />
         <activity android:name=".SupportFragment" />
-        <activity android:name=".MainMenu" />
+        <activity android:name=".MainMenuActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

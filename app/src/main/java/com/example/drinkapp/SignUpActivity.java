@@ -47,8 +47,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.bt_go_back:
-                Intent returnToLogin = new Intent(this, MainActivity.class);
-                startActivity(returnToLogin);
                 finish();
                 break;
         }
