@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +31,11 @@ public class OrderDrinksActivity extends AppCompatActivity implements Callback {
     private RecyclerView recyclerView;
     private DrinksViewActivity mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private int statePosition;
+    String machineID;
+
+    DrinkOrder drinkOrder = new DrinkOrder();
+
+    FloatingActionButton order;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -36,29 +43,48 @@ public class OrderDrinksActivity extends AppCompatActivity implements Callback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orderdrinks);
 
-        createDrinkList();
-        //showDrinksRecycleView();
+        SharedPreferences preferences = getSharedPreferences("App", Context.MODE_PRIVATE);
+        this.machineID = preferences.getString("MachineID", "Hello") ;
 
+        createDrinkList();
+
+        drinkOrder.machineID = this.machineID;
+
+        order = findViewById(R.id.fab);
+        order.hide();
+        order.setOnClickListener(this::order);
     }
 
+    public void order(View click ) {
+        String path = "drinks/order";
+        ServerRequests sr = new ServerRequests(path, drinkOrder, null, new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                finish();
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                finish();
+            }
+        }, HTTPRequestType.Post);
+        mDrinkList = new ArrayList<>();
+        sr.execute();
+    }
     public void changeItem(int position) {
-        mDrinkList.get(position).check();
+        DrinkViewItems currentDrink = mDrinkList.get(position);
+        currentDrink.check();
+        drinkOrder.drinkID = currentDrink.getmID();
+        order.show();
+
     }
 
     private void createDrinkList() {
-        SharedPreferences preferences = getSharedPreferences("App", Context.MODE_PRIVATE);
-        String machineID = preferences.getString("MachineID", "Helloer") ;
+
         String path = "drinks/" + machineID;
         ServerRequests sr = new ServerRequests(path, null, null, this, HTTPRequestType.Get);
         mDrinkList = new ArrayList<>();
         sr.execute();
-        /*
-
-        mDrinkList.add(new DrinkViewItems("", "Vodka+Cola"));
-        mDrinkList.add(new DrinkViewItems("","Vodka+Fanta"));
-        mDrinkList.add(new DrinkViewItems( "", "Rom+Cola"));
-        mDrinkList.add(new DrinkViewItems( "","Vodka+Cola"));
-         */
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -114,5 +140,11 @@ public class OrderDrinksActivity extends AppCompatActivity implements Callback {
         DrinkViewItems toViewItem() {
             return new DrinkViewItems(id, name);
         }
+    }
+
+    // Default values to avoid null pointer errors
+    class DrinkOrder {
+        String drinkID = "";
+        String machineID = "";
     }
 }
