@@ -64,8 +64,6 @@ public class DrinksViewActivity extends RecyclerView.Adapter<DrinksViewActivity.
         DrinkViewItems currentItem = mDrinkList.get(position);
         holder.drinkImage.setImageResource(currentItem.getImageDrink());
         holder.drinkMame.setText(currentItem.getDrinkName());
-        holder.drinkDescription.setText(currentItem.getDrinkDescription());
-        holder.drinkPrice.setText(currentItem.getDrinkPrice());
         holder.checkedDrinks.setImageResource(currentItem.getChecked());
     }
 

@@ -40,7 +40,7 @@ public class ServerRequests<T> extends AsyncTask {
 
             RequestBody body = RequestBody.create(userJson, JSON);
             Request.Builder reqBuilder = new Request.Builder()
-                    .url("http://10.0.1.30/" + path);
+                    .url("http://192.168.0.14/" + path);
 
             switch (requestType) {
                 case Get: reqBuilder = reqBuilder.get(); break;
