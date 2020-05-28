@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
@@ -27,10 +27,9 @@ import okhttp3.Response;
 
 public class OrderDrinksActivity extends AppCompatActivity implements Callback {
 
-    private ArrayList< DrinkViewItems > mDrinkList;
+    private ArrayList<DrinkViewItems> mDrinkList;
     private RecyclerView recyclerView;
     private DrinksViewActivity mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
     String machineID;
 
     DrinkOrder drinkOrder = new DrinkOrder();
@@ -44,7 +43,7 @@ public class OrderDrinksActivity extends AppCompatActivity implements Callback {
         setContentView(R.layout.activity_orderdrinks);
 
         SharedPreferences preferences = getSharedPreferences("App", Context.MODE_PRIVATE);
-        this.machineID = preferences.getString("MachineID", "Hello") ;
+        this.machineID = preferences.getString("MachineID", "Hello");
 
         createDrinkList();
 
@@ -55,11 +54,12 @@ public class OrderDrinksActivity extends AppCompatActivity implements Callback {
         order.setOnClickListener(this::order);
     }
 
-    public void order(View click ) {
+    public void order(View click) {
         String path = "drinks/order";
         ServerRequests sr = new ServerRequests(path, drinkOrder, null, new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Unable to connect to server", Toast.LENGTH_SHORT).show());
                 finish();
             }
 
@@ -71,6 +71,7 @@ public class OrderDrinksActivity extends AppCompatActivity implements Callback {
         mDrinkList = new ArrayList<>();
         sr.execute();
     }
+
     public void changeItem(int position) {
         DrinkViewItems currentDrink = mDrinkList.get(position);
         currentDrink.check();
@@ -92,7 +93,7 @@ public class OrderDrinksActivity extends AppCompatActivity implements Callback {
         recyclerView = findViewById(R.id.drinksList);
         recyclerView.setHasFixedSize(true);
 
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         mAdapter = new DrinksViewActivity(mDrinkList);
 
         recyclerView.setLayoutManager(layoutManager);
@@ -132,6 +133,7 @@ public class OrderDrinksActivity extends AppCompatActivity implements Callback {
     class DrinkContent {
         String id;
         String name;
+
         DrinkContent(String id, String name) {
             this.id = id;
             this.name = name;

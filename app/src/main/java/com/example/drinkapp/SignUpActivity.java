@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -65,15 +66,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     class signUpCallBack implements Callback {
         @Override
         public void onFailure(@NotNull Call call, @NotNull IOException e) {
-            e.printStackTrace();
-            System.out.println("failed");
+            runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Unable to connect to server", Toast.LENGTH_SHORT).show());
             call.cancel();
         }
 
         @Override
         public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-            System.out.println(response.body().string());
-            System.out.println("Response Received");
+            runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Your account has been registered!", Toast.LENGTH_SHORT).show());
         }
     }
 }

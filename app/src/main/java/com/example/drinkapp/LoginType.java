@@ -27,7 +27,7 @@ public enum LoginType {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     static LoginType token(String token) {
-        LoginType login =  Token;
+        LoginType login = Token;
 
         login.hash = Base64
                 .getEncoder()

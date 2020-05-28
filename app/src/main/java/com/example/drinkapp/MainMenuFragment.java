@@ -18,7 +18,6 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_mainmenu, container, false);
-
         orderButton = v.findViewById(R.id.orderDrinks);
         orderButton.setOnClickListener(this);
 

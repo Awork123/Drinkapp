@@ -13,7 +13,7 @@ public class DrinkViewItems {
         mID = id;
         int image;
         int random = new Random().nextInt(3);
-        switch (random){
+        switch (random) {
             case 0:
                 image = R.drawable.ic_history;
                 break;

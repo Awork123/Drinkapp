@@ -13,7 +13,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 
-
 public class ServerRequests<T> extends AsyncTask {
     T object;
     Callback callback;
@@ -43,16 +42,24 @@ public class ServerRequests<T> extends AsyncTask {
                     .url("http://192.168.0.14/" + path);
 
             switch (requestType) {
-                case Get: reqBuilder = reqBuilder.get(); break;
-                case Post: reqBuilder = reqBuilder.post(body);
-                    System.out.println("Time to print");;break;
+                case Get:
+                    reqBuilder = reqBuilder.get();
+                    break;
+                case Post:
+                    reqBuilder = reqBuilder.post(body);
+                    System.out.println("Time to print");
+                    ;
+                    break;
             }
 
-            if(loginType != null) {
-                switch (loginType)
-                {
-                    case Basic: reqBuilder.header("Authorization", "Basic " + loginType.hash); break;
-                    case Token: reqBuilder.header("Authorization", "Token " + loginType.hash); break;
+            if (loginType != null) {
+                switch (loginType) {
+                    case Basic:
+                        reqBuilder.header("Authorization", "Basic " + loginType.hash);
+                        break;
+                    case Token:
+                        reqBuilder.header("Authorization", "Token " + loginType.hash);
+                        break;
                 }
             }
 
