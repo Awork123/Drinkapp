@@ -38,6 +38,8 @@ public class SupportFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        //Switch statements for which buttons is being clicked, and each case is a button being clicked.
+        //After a user clicks on a button ,start a new activity and take the user there, using Intent.
         switch (view.getId()) {
             case R.id.bnPayment:
                 Intent goToPaymentInfo = new Intent(getActivity(), SupportPaymentActivity.class);

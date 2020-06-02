@@ -37,6 +37,8 @@ public class SupportEmail extends AppCompatActivity {
         String subjectofEmail = "Support for Autobar app";
         String messageEmail = mEditTextMessage.getText().toString();
 
+        //Start a new activity and take the user there, using Intent. With this intent, we put extra our strings, to make the intent
+        //automatically put the information, when the user open their preferred email
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.putExtra(Intent.EXTRA_EMAIL, ourSupportEmailList);
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, subjectofEmail);
