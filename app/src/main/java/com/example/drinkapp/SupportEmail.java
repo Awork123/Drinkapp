@@ -30,6 +30,8 @@ public class SupportEmail extends AppCompatActivity {
     }
 
     private void sendMail() {
+        //Create the title and the recipient, to make easier to email.
+        //Change the body of the mail equal to the text written in the app, as a string
         String ourSupportEmail = "Test@gmail.com";
         String[] ourSupportEmailList = ourSupportEmail.split(",");
         String subjectofEmail = "Support for Autobar app";

@@ -23,6 +23,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
 
         View v = inflater.inflate(R.layout.fragment_account, container, false);
 
+        //Bind our defined widgets to the widgets on the XML file.
         textName = v.findViewById(R.id.textName);
         textGetName = v.findViewById(R.id.textGetName);
         buttonEdit = v.findViewById(R.id.buttonEdit);
@@ -35,10 +36,11 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v == buttonEdit) {
-            Intent changeProfile = new Intent(getActivity(), AccountEditActivity.class);
-            startActivity(changeProfile);
+        switch (v.getId()) {
+            case R.id.buttonEdit:
+                Intent changeProfile = new Intent(getActivity(), AccountEditActivity.class);
+                startActivity(changeProfile);
+                break;
         }
-
     }
 }

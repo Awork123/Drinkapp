@@ -31,9 +31,11 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view == orderButton) {
-            Intent orderDrinks = new Intent(getActivity(), OrderDrinksActivity.class);
-            startActivity(orderDrinks);
+        switch (view.getId()) {
+            case R.id.orderDrinks:
+                Intent orderDrinks = new Intent(getActivity(), OrderDrinksActivity.class);
+                startActivity(orderDrinks);
+                break;
         }
     }
 
