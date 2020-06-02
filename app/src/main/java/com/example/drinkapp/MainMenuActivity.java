@@ -18,6 +18,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainMenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    //Define our needed widgets
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
@@ -26,8 +27,10 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Set our layout equal to the corresponding XML file.
         setContentView(R.layout.mainmenu);
 
+        //Bind our defined widgets to the widgets on the XML file.
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);

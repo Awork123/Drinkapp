@@ -9,17 +9,23 @@ import android.widget.EditText;
 
 public class SupportEmail extends AppCompatActivity {
 
+    //Define our needed widgets
     private EditText mEditTextMessage;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Set our layout equal to the corresponding XML file.
         setContentView(R.layout.activity_support_email);
 
+        //Bind our defined widgets to the widgets on the XML file.
         mEditTextMessage = findViewById(R.id.editemailtext);
+
+        //Set an OnClickListener, to make the buttons interactable.
         Button buttonSendEmail = findViewById(R.id.buttonsendemail);
 
+        //Set an OnClickListener, to make the buttons interactable.
         buttonSendEmail.setOnClickListener(v -> sendMail());
     }
 

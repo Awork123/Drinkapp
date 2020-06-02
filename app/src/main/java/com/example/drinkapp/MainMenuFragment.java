@@ -12,13 +12,18 @@ import android.widget.Button;
 
 
 public class MainMenuFragment extends Fragment implements View.OnClickListener {
+    //Define our needed widgets
     Button orderButton;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_mainmenu, container, false);
+
+        //Bind our defined widgets to the widgets on the XML file.
         orderButton = v.findViewById(R.id.orderDrinks);
+
+        //Set an OnClickListener, to make the buttons interactable.
         orderButton.setOnClickListener(this);
 
         return v;

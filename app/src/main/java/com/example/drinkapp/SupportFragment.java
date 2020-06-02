@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 public class SupportFragment extends Fragment implements View.OnClickListener {
+    //Define our needed widgets
     Button buttonPaymentInfoOptions, buttonGeneralInfoOptions, buttonInfoMyOrder, emailSupport;
 
     @Nullable
@@ -20,11 +21,13 @@ public class SupportFragment extends Fragment implements View.OnClickListener {
 
         View v = inflater.inflate(R.layout.fragment_support, container, false);
 
+        //Bind our defined widgets to the widgets on the XML file.
         buttonPaymentInfoOptions = v.findViewById(R.id.bnPayment);
         buttonGeneralInfoOptions = v.findViewById(R.id.bnGeneralInfo);
         buttonInfoMyOrder = v.findViewById(R.id.bnMyOrder);
         emailSupport = v.findViewById(R.id.bnEmailHelp);
 
+        //Set an OnClickListener, to make the buttons interactable.
         buttonPaymentInfoOptions.setOnClickListener(this);
         buttonGeneralInfoOptions.setOnClickListener(this);
         buttonInfoMyOrder.setOnClickListener(this);

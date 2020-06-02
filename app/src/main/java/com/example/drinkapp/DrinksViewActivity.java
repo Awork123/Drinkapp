@@ -24,17 +24,13 @@ public class DrinksViewActivity extends RecyclerView.Adapter<DrinksViewActivity.
 
     public static class DrinksViewHolder extends RecyclerView.ViewHolder {
         public TextView drinkMame;
-        public TextView drinkDescription;
         public ImageView drinkImage;
-        public TextView drinkPrice;
         public ImageView checkedDrinks;
 
         public DrinksViewHolder(View view, final OnItemClickListener listener) {
             super(view);
             drinkMame = view.findViewById(R.id.DrinksName);
-            drinkDescription = view.findViewById(R.id.DrinksDescription);
             drinkImage = view.findViewById(R.id.DrinkImage);
-            drinkPrice = view.findViewById(R.id.DrinkPrice);
             checkedDrinks = view.findViewById(R.id.CheckedDrink);
 
             view.setOnClickListener(v -> {

@@ -56,7 +56,7 @@ public class OrderDrinksActivity extends AppCompatActivity implements Callback {
 
     public void order(View click) {
         String path = "drinks/order";
-        ServerRequests sr = new ServerRequests(path, drinkOrder, null, new Callback() {
+        ServerRequests<DrinkOrder> sr = new ServerRequests<>(path, drinkOrder, null, new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Unable to connect to server", Toast.LENGTH_SHORT).show());
@@ -64,7 +64,7 @@ public class OrderDrinksActivity extends AppCompatActivity implements Callback {
             }
 
             @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
                 finish();
             }
         }, HTTPRequestType.Post);
@@ -81,7 +81,6 @@ public class OrderDrinksActivity extends AppCompatActivity implements Callback {
     }
 
     private void createDrinkList() {
-
         String path = "drinks/" + machineID;
         ServerRequests sr = new ServerRequests(path, null, null, this, HTTPRequestType.Get);
         mDrinkList = new ArrayList<>();

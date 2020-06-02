@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class AccountFragment extends Fragment implements View.OnClickListener {
+    //Define our needed widgets
     TextView textName, textGetName;
     Button buttonEdit;
 
@@ -25,6 +26,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         textName = v.findViewById(R.id.textName);
         textGetName = v.findViewById(R.id.textGetName);
         buttonEdit = v.findViewById(R.id.buttonEdit);
+
+        //Set an OnClickListener, to make the buttons interactable.
         buttonEdit.setOnClickListener(this);
 
         return v;
