@@ -5,7 +5,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         //Switch statements for which buttons is being clicked, and each case is a button being clicked.
-        //We do this, as it is more clean and more scalibale.
+        //We do this, as it is more clean and more scalable.
         switch (view.getId()) {
             case R.id.bt_sign_up:
                 //Start a new activity and take the user there, using Intent.
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-            //Switch statements for which response is given. 200 means 'accepted'.
+            //Switch statements for which response is given. 200 means 'successful'.
             switch (response.code()) {
                 case 200:
                     //Display a popup on the UI with picture and text, that shows the user they successfully logged in.
@@ -101,14 +100,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         AlertDialog alertDialog = builder.create();
                         alertDialog.show();
                     });
-
+                    //Save the token, later used for authentication
                     Gson gson = new Gson();
                     String token = gson.fromJson(response.body().string(), Token.class).token;
                     SharedPreferences preferences = getSharedPreferences("App", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("Token", token);
                     editor.apply();
-                    System.out.println(token);
                     ServerRequests sr = new ServerRequests("machine", null, null, new MachineHandler(), HTTPRequestType.Get);
                     sr.execute();
                     break;
@@ -128,6 +126,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
 
             switch (response.code()) {
+                //Switch statements for which response is given. 200 means 'successful'
+                //Here we save the ID for the machine, for future orders.
                 case 200:
                     Gson gson = new Gson();
                     Machine[] machines = gson.fromJson(response.body().string(), Machine[].class);
@@ -146,11 +146,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     class Machine {
+        //used to save the ID of the machine.
         String id;
     }
 
 
     private class Token {
+        //Used to save the unique token for a session, to make it possible for the machine to know who ordered.
         String token;
     }
 }

@@ -18,6 +18,7 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //Adds the corresponding XML to activity on runtime.
         View v = inflater.inflate(R.layout.fragment_mainmenu, container, false);
 
         //Bind our defined widgets to the widgets on the XML file.
@@ -31,6 +32,9 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        //Switch statements for which buttons is being clicked. While we only have one button for now
+        //we still opted for switch, as it is more scalable
+        //Start a new activity and take the user there, using Intent.
         switch (view.getId()) {
             case R.id.orderDrinks:
                 Intent orderDrinks = new Intent(getActivity(), OrderDrinksActivity.class);

@@ -60,12 +60,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     class SignUp {
-
+        //To be used to encode later
         String mail;
         String password;
 
         SignUp(String uname, String pword) {
-
+            //To be used to encode later
             mail = uname;
             password = pword;
         }

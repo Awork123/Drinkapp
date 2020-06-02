@@ -14,6 +14,7 @@ public class HistoryFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //Adds the corresponding XML to activity on runtime.
         View v = inflater.inflate(R.layout.fragment_history, container, false);
         return v;
     }

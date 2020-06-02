@@ -19,6 +19,7 @@ public class SupportFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        //Adds the corresponding XML to activity on runtime.
         View v = inflater.inflate(R.layout.fragment_support, container, false);
 
         //Bind our defined widgets to the widgets on the XML file.
@@ -39,7 +40,7 @@ public class SupportFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         //Switch statements for which buttons is being clicked, and each case is a button being clicked.
-        //After a user clicks on a button ,start a new activity and take the user there, using Intent.
+        //After a user clicks on a button, start a new activity and take the user there, using Intent.
         switch (view.getId()) {
             case R.id.bnPayment:
                 Intent goToPaymentInfo = new Intent(getActivity(), SupportPaymentActivity.class);
