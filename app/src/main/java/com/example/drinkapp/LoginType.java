@@ -7,11 +7,14 @@ import androidx.annotation.RequiresApi;
 import java.util.Base64;
 
 public enum LoginType {
+    // For using Token authentication
     Token,
+    // For using password and username
     Basic;
 
     public String hash;
 
+    // Convenience function for making a basic authentication
     @RequiresApi(api = Build.VERSION_CODES.O)
     static LoginType basic(String username, String password) {
         LoginType login = Basic;
@@ -25,6 +28,7 @@ public enum LoginType {
         return login;
     }
 
+    // Convenience function for making a basic authentication
     @RequiresApi(api = Build.VERSION_CODES.O)
     static LoginType token(String token) {
         LoginType login = Token;
